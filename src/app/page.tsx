@@ -35,7 +35,7 @@ export default function Home() {
               key={x}>
               <Image
                 alt="test"
-                src={`/upload/${x}`}
+                src={`/api/public/upload/${x}`}
                 className="object-cover rounded-md"
                 fill
               />

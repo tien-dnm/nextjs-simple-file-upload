@@ -1,5 +1,5 @@
 "use server";
-import { writeFileSync, mkdir, readdir, readdirSync } from "fs";
+import { writeFileSync, mkdir, readdir, readdirSync, existsSync } from "fs";
 import path from "path";
 export async function submitForm(formData: FormData) {
   const uploadPath = path.join(process.cwd(), "public", "upload");
@@ -21,6 +21,10 @@ export async function submitForm(formData: FormData) {
 
 export async function getFiles() {
   const uploadPath = path.join(process.cwd(), "public", "upload");
-  const dir = readdirSync(uploadPath);
-  return dir;
+  const exist = existsSync(uploadPath);
+  if (exist) {
+    const dir = readdirSync(uploadPath);
+    return dir;
+  }
+  return [];
 }
