@@ -31,13 +31,14 @@ export default function Home() {
         {hi?.map((x) => {
           return (
             <div
-              className="w-40 h-40 relative "
+              className="w-40 h-40  "
               key={x}>
               <Image
                 alt="test"
                 src={`/api/public/upload/${x}`}
                 className="object-cover rounded-md"
-                fill
+                width={150}
+                height={150}
               />
             </div>
           );
