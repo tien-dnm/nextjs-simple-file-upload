@@ -55,6 +55,7 @@ export default function Home({ params }: { params: { slug: string[] } }) {
         formData.append("file", file);
       }
       await submitForm(formData, ...slugs);
+      e.target.value = "";
       getAndSetFiles();
     }
   };
