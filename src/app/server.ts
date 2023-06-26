@@ -36,7 +36,7 @@ const createFolderWithNumber = (
     // If the folder with the number already exists, recursively call the function with an incremented number
     createFolderWithNumber(folderName, number + 1, ...slugs);
   } else {
-    mkdirSync(newFolderPath);
+    mkdirSync(newFolderPath, { recursive: true });
   }
 };
 
@@ -50,7 +50,7 @@ export async function submitForm(formData: FormData, ...slugs: string[]) {
       const buffer = Buffer.from(miti);
       const fullFile = path.join(fullPath, file.name);
       if (!existsSync(fullPath)) {
-        mkdirSync(fullPath);
+        mkdirSync(fullPath, { recursive: true });
       }
       writeFileSync(fullFile, buffer);
       res.push(file.name);
