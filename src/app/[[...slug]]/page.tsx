@@ -48,13 +48,13 @@ export default function Home({ params }: { params: { slug: string[] } }) {
 
   const handleChangeInput = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
+    if (files && files.length > 0) {
       const formData = new FormData();
       for (let index = 0; index < files.length; index++) {
         const file = files[index];
         formData.append("file", file);
       }
-      await submitForm(formData);
+      await submitForm(formData, ...slugs);
       getAndSetFiles();
     }
   };

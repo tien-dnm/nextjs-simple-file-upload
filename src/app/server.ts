@@ -40,15 +40,18 @@ const createFolderWithNumber = (
   }
 };
 
-export async function submitForm(formData: FormData) {
+export async function submitForm(formData: FormData, ...slugs: string[]) {
+  const fullPath = path.join(uploadPath, ...slugs);
   const files = formData.getAll("file");
   const res: string[] = [];
   for (const file of files) {
     if (file instanceof Blob) {
       const miti = await file.arrayBuffer();
       const buffer = Buffer.from(miti);
-      const fullFile = path.join(uploadPath, file.name);
-      mkdirSync(uploadPath);
+      const fullFile = path.join(fullPath, file.name);
+      if (!existsSync(fullPath)) {
+        mkdirSync(fullPath);
+      }
       writeFileSync(fullFile, buffer);
       res.push(file.name);
     }
